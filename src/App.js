@@ -1,36 +1,7 @@
 import React from "react";
 import "./App.css";
+import Calc from './operation';
 
-// class App extends React.Component {
-//      state = {
-//        fname: '',
-//        lname: '',
-//        lan: ''
-//      }
-//     updateValue = (event) =>{
-//       this.setState({
-//         [event.target.name]: event.target.value
-//       })
-//     }
-//     render(){
-//   return (
-//     <div>
-//         <form>
-//            <input type="text" name="fname" value={this.state.fname} onChange={e=>this.updateValue(e)}/>   <br />
-//            <input type="text"name="lname" value={this.state.lname} onChange={e=>this.updateValue(e)}/>   <br />
-//            <select name="lan"  onChange={e=>this.updateValue(e)}>
-
-//                <option>Java</option>
-//                <option>Android</option>
-//            </select>
-//         </form>
-//         First Name: {this.state.fname}<br/>
-//         Last Name: {this.state.lname}<br/>
-//         Language: {this.state.lan}<br/>
-//       </div>
-//   );
-//   }
-// }
 class Calc_Nums extends React.Component {
   state = {
     val: "",
@@ -38,13 +9,60 @@ class Calc_Nums extends React.Component {
     val2: "",
     flag: 0
   };
+  showAnswer = answer => {
+    this.setState({
+      val: answer,
+      val1: answer,
+      val2: "",
+      flag: 1
+    });
+  };
   changeFlag = data => {
-    // console.log(this.state.val1,this.state.val2);
+    console.log(this.state.val1, this.state.val2);
     this.setState({
       val: "",
       flag: data
     });
   };
+
+  plusOrMinus = () => {
+    console.log("Called");
+    if (!this.state.flag) {
+      if (Number(this.state.val) < 0) {
+        this.setState({
+          val: Math.abs(Number(this.state.val)),
+          val1: Math.abs(Number(this.state.val1))
+        })
+      } else {
+        this.setState({
+          val: "-" + this.state.val,
+          val1: "-" + this.state.val1,
+        })
+      }
+    } else {
+      if (Number(this.state.val) < 0) {
+        this.setState({
+          val: Math.abs(Number(this.state.val)),
+          val2: Math.abs(Number(this.state.val2))
+        })
+      }
+      else {
+        this.setState({
+          val: "-" + this.state.val,
+          val2: "-" + this.state.val2,
+        })
+      }
+    }
+  }
+
+  clearState = () => {
+    this.setState({
+      val: '',
+      val1: '',
+      val2: '',
+      flag: 0
+    })
+  }
   inputValue = event => {
     if (this.state.flag === 0) {
       this.setState({
@@ -58,174 +76,143 @@ class Calc_Nums extends React.Component {
       });
     }
   };
+
+
   render() {
     return (
+
       <div>
-        <input type="text" value={this.state.val} />
-        <br />
-        <button value="1">-</button>
-        <button value="1" onClick={e => this.inputValue(e)}>
-          1
+        <div className="row">
+          <div className="col">
+            <input type="text" value={this.state.val} className="form-control" disabled />
+          </div>
+        </div>
+        <div className="row">
+          <div className="col">
+            <button className="btn" onClick={(e) => this.plusOrMinus(e)}>-/+	</button></div>
+          <div className="col">
+            <button value="1" className="btn" onClick={e => this.inputValue(e)}>
+              1
+        </button></div>
+          <div className="col">
+            <button className="btn"
+              value="2"
+              onClick={e => {
+                this.inputValue(e);
+              }}
+            >
+              2
+        </button></div>
+          <div className="col">
+            <button className="btn"
+              value="3"
+              onClick={e => {
+                this.inputValue(e);
+              }}
+            >
+              3
         </button>
-        <button
-          value="2"
-          onClick={e => {
-            this.inputValue(e);
-          }}
-        >
-          2
+          </div>
+        </div>
+        <div className="row">
+          <div className="col">
+            <button className="btn"
+              value="4"
+              onClick={e => {
+                this.inputValue(e);
+              }}
+            >
+              4
         </button>
-        <button
-          value="3"
-          onClick={e => {
-            this.inputValue(e);
-          }}
-        >
-          3
+          </div>
+          <div className="col">
+            <button className="btn"
+              value="5"
+              onClick={e => {
+                this.inputValue(e);
+              }}
+            >
+              5
         </button>
-        <br />
-        <button
-          value="4"
-          onClick={e => {
-            this.inputValue(e);
-          }}
-        >
-          4
+          </div>
+          <div className="col">
+            <button className="btn"
+              value="6"
+              onClick={e => {
+                this.inputValue(e);
+              }}
+            >
+              6
         </button>
-        <button
-          value="5"
-          onClick={e => {
-            this.inputValue(e);
-          }}
-        >
-          5
-        </button>
-        <button
-          value="6"
-          onClick={e => {
-            this.inputValue(e);
-          }}
-        >
-          6
-        </button>
-        <button
-          value="7"
-          onClick={e => {
-            this.inputValue(e);
-          }}
-        >
-          7
-        </button>
-        <br />
-        <button
-          value="8"
-          onClick={e => {
-            this.inputValue(e);
-          }}
-        >
-          8
-        </button>
-        <button
-          value="9"
-          onClick={e => {
-            this.inputValue(e);
-          }}
-        >
-          9
-        </button>
-        <button
-          value="0"
-          onClick={e => {
-            this.inputValue(e);
-          }}
-        >
-          0
-        </button>
-        <button
-          value="00"
-          onClick={e => {
-            this.inputValue(e);
-          }}
-        >
-          00
-        </button>
+          </div>
+        <div className="col">
+            <button className="btn"
+              value="7"
+              onClick={e => {
+                this.inputValue(e);
+              }}
+            >
+              7
+            </button>
+        </div>
+        </div>
+        <div className="row">
+          <div className="col">
+            <button className="btn"
+              value="8"
+              onClick={e => {
+                this.inputValue(e);
+              }}
+            >
+              8
+             </button>
+        </div>
+        <div className="col">
+            <button className="btn"
+              value="9"
+              onClick={e => {
+                this.inputValue(e);
+              }}
+            >
+              9
+            </button>
+        </div>
+        <div className="col">
+            <button className="btn"
+              value="0"
+              onClick={e => {
+                this.inputValue(e);
+              }}
+            >
+              0
+            </button>
+        </div>
+        <div className="col">
+            <button className="btn"
+              value="00"
+              onClick={e => {
+                this.inputValue(e);
+              }}
+            >
+              00
+            </button>
+          </div>
+        </div>
         <Calc
           v1={this.state.val1}
           v2={this.state.val2}
           callbackFun={this.changeFlag}
+          showans={this.showAnswer}
+          clearData={this.clearState}
         />
       </div>
     );
   }
 }
-class Calc extends React.Component {
-  state = {
-    vl1: "",
-    vl2: "",
-    operation: "+",
-    ans: ""
-  };
-  componentWillReceiveProps(nextProps) {
-		console.log(
-			"called"
-		)
-    this.setState({ vl1: nextProps.v1 });
-    this.setState({ vl2: nextProps.v2 });
-  }
 
-  perOperation = op => {
-		const { vl1 } = this.state
-		switch(op){
-			case '+':
-				console.log(vl1+ this.state.vl2);
-			this.setState({ ans: Number(vl1) + Number(this.state.vl2) });
-				break;
-			case '-':
-				this.setState({ ans: Number(vl1) - Number(this.state.vl2) });
-				break;
-			case '*':
-			this.setState({ ans: Number(vl1) * Number(this.state.vl2) });
-				break;
-			case '/':
-			this.setState({ ans: Number(vl1) / Number(this.state.vl2) });
-			break;	
-		}
-    console.log(">>",this.state.ans);
-  };
-  render() {
-    return (
-      <div>
-        <button
-          onClick={e => {
-						this.setState({operation: '+'})
-            this.props.callbackFun(1);
-          }}
-        >
-          +
-        </button>
-        <button
-          onClick={e => {
-						this.setState({operation: '-'})
-            this.props.callbackFun(1);
-          }}
-        >
-          -
-        </button>
-				<button
-				 onClick={e => {
-						this.setState({operation: '*'})
-            this.props.callbackFun(1);
-          }}>*</button>
-        <button 
-				 onClick={e => {
-					this.setState({operation: '*'})
-					this.props.callbackFun(1);
-				}}>/</button>
-        <button onClick={() => this.perOperation(this.state.operation)}>=</button>
-			<>Ans : {this.state.ans}</>
-			</div>
-    );
-  }
-}
+
+
+
+
 
 export default Calc_Nums;
