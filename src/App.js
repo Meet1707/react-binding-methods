@@ -210,9 +210,4 @@ class Calc_Nums extends React.Component {
   }
 }
 
-
-
-
-
-
 export default Calc_Nums;

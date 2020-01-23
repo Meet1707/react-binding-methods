@@ -12,8 +12,11 @@ code {
     monospace;
 }
 
-button{
+/* button{
   width: 100%;
+} */
+.form-control{
+  text-align: right;
 }
 .borderblack{
   padding: 10px;
