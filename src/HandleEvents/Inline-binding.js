@@ -1,5 +1,5 @@
 import React from 'react';
-import ArrowFunctionWithParameter from './bind-with-parameter-arrow-function';
+import ConstructorBinding from './Constructor-Binding'
 
 class App extends React.Component {
     // state = {
@@ -15,7 +15,7 @@ class App extends React.Component {
                 {/* <button onClick={this.inlineBinding.bind(this)}>Click Me!!</button>
                 <p>{this.state.foo}</p><hr /> */}
 
-                <ArrowFunctionWithParameter/>
+                <ConstructorBinding />
             </>
         );
     }

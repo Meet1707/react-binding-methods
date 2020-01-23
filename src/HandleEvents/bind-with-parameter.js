@@ -1,4 +1,5 @@
 import React from 'react';
+import ArrowFunctionWithParameter from './bind-with-parameter-arrow-function';
 
 class BindWithParameter extends React.Component {
     state = {
@@ -14,6 +15,8 @@ class BindWithParameter extends React.Component {
             <h5>Binding with parameter</h5>
             <button onClick={this.bindWithParameter.bind(this,"Ramsay","Bolton")}>Click Me!!</button>
             <p>{this.state.foo}</p><hr />
+
+            <ArrowFunctionWithParameter />
         </>);
     }
 }
